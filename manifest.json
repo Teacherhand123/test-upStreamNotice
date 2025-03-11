@@ -4,15 +4,15 @@
     "version": "1.0",
     "permissions": ["alarms", "cookies", "tabs", "storage"],
     "host_permissions": ["<all_urls>"],
-    "background": {
-        "service_worker": "background.js"
-    },
     "content_scripts": [
     {
       "matches": ["<all_urls>"],
       "js": ["content.js"]
     }
   ],
+  "background": {
+      "service_worker": "background.js"
+  },
   "action": {
       "default_popup": "popup.html"
   }
