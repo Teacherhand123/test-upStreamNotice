@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "up是否直播",
     "version": "1.0",
-    "permissions": ["alarms", "cookies", "tabs", "storage"],
+    "permissions": ["alarms", "cookies", "tabs", "storage", "scripting"],
     "host_permissions": ["<all_urls>"],
     "content_scripts": [
     {

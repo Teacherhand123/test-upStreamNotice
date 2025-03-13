@@ -1,6 +1,8 @@
 chrome.runtime.onMessage.addListener((message) => {
+    console.log("我在content.js已接受到消息")
+
     if (message.action === "upStreamList") {
-        console.log(message.data)
+        console.log("在contentjs", message.data)
         const body = document.querySelector("body")
         const toast = document.createElement("div")
 
