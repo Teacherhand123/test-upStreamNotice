@@ -37,29 +37,12 @@ async function getUpStream() {
 
                 const resJson = await res.json()
                 console.log(resJson)
-                chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-                    chrome.tabs.sendMessage(tabs[0].id, {action: "ping"}, (response) => {
-                        // 出现错误
-                        if (chrome.runtime.lastError || !response) {
-                            console.warn("content.js 没加载，")
-                            // 加载content.js
-                            chrome.scripting.executeScript({
-                                target: { tabId: tabs[0].id },
-                                files: ["content.js"],
-                                world: "MAIN"
-                            }).then(() => {
-                                console.log("等待500ms后再发送消息")
-                                setTimeout(() => {
-                                    console.log("开始发送resJson")
-                                    chrome.tabs.sendMessage(tabs[0].id, { action: "upStreamList", data: resJson })
-                                }, 500)
-                            })
-                        } else {
-                            console.log("开始发送resJson") 
-                            // 没有出现错误，直接发送消息
-                            chrome.tabs.sendMessage(tabs[0].id, { action: "upStreamList", data: resJson })
-                        }
-                    })
+                chrome.tabs.sendMessage(tabs[0].id, {action: "ping"}, async (response) => {
+                    // 出现错误，content.js 没加载
+                    await setTimeout(() => {
+                        console.log("开始发送resJson")
+                        chrome.tabs.sendMessage(tabs[0].id, { action: "upStreamList", data: resJson })
+                    }, 500)
                 })
             }
         }
@@ -68,7 +51,7 @@ async function getUpStream() {
 
 // 创建定时任务，每 5 到 7 分钟执行一次
 function setRandomAlarm() {
-    const delayInMinutes = Math.floor(Math.random() * 1 + 1); // 5-8 分钟随机
+    const delayInMinutes = Math.floor(Math.random() * 2) + 1; // 1-2 分钟随机
     console.log(`设置定时任务：${delayInMinutes} 分钟后执行`);
     
     chrome.alarms.create("myPeriodicTask", {
