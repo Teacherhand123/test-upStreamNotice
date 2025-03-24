@@ -12,7 +12,8 @@ chrome.runtime.onMessage.addListener((message) => {
                 streamArray.push({
                     "face": data.face,
                     "title": data.title,
-                    "uname": data.uname
+                    "uname": data.uname,
+                    "roomid": data.roomid
                 })
             }
         }
@@ -31,6 +32,9 @@ chrome.runtime.onMessage.addListener((message) => {
             for (const elem of streamArray) {
                 const child = document.createElement("div")
                 child.style.marginBottom = "10px"
+                const aHref = document.createElement("a")
+                aHref.href = `https://live.bilibili.com/${elem.roomid}`
+                aHref.target = "_blank"
                 const img = document.createElement("img")
                 img.style.height = "50px"
                 img.style.width = "50px"
@@ -45,7 +49,8 @@ chrome.runtime.onMessage.addListener((message) => {
                 title.innerText = elem.title
                 title.style.fontSize = "15px"
 
-                child.appendChild(img)
+                aHref.appendChild(img)
+                child.appendChild(aHref)
                 child.appendChild(title)
                 child.appendChild(name)
                 toast.appendChild(child)
