@@ -29,6 +29,7 @@ chrome.runtime.onMessage.addListener((message) => {
             // toast.style.width = window.innerWidth
             toast.style.backgroundColor = "black"
             toast.style.width = "10%"
+            toast.style.borderRadius = "10px"
             toast.style.border = "solid 1px #0c59a6"
 
             for (const elem of streamArray) {
