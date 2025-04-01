@@ -34,6 +34,7 @@ chrome.runtime.onMessage.addListener((message) => {
             for (const elem of streamArray) {
                 const child = document.createElement("div")
                 child.style.marginBottom = "10px"
+                child.style.paddingLeft = "10px"
                 const aHref = document.createElement("a")
                 aHref.href = `https://live.bilibili.com/${elem.roomid}`
                 aHref.target = "_blank"
